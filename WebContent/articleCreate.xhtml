@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+	
+<h:head>
+	<h:outputScript library="javax.faces" name="jsf.js"/>
+	<title>Article</title>
+</h:head>
+
+<h:body>
+<ui:composition template="/WEB-INF/templates/master.xhtml">
+
+<ui:define name="content">
+	
+		<br/>
+	<h3>Create new Article</h3>
+	<br/>
+	
+	
+		
+		<h:form prependId="false" id="form" styleClass="styleGreen">
+		<p:growl id="message"/>
+		
+		
+		<p:panel id="newArticlePanel" header="Create New Article" style="width: 400px; position:relative; left:100px">
+		 	
+		 	<br/>
+			<p:panelGrid columns="2">
+	
+		
+				<p:outputLabel for="articleName" value="Name"/>
+				<p:inputText id="articleName" value="#{articleBean.articleName}" required="true" requiredMessage="Enter Name"/>
+				
+				<p:outputLabel for="articleDescription" value="Description"/>
+				<p:inputText id="articleDescription" value="#{articleBean.articleDescription}" required="true" requiredMessage="Enter Description"/>
+		
+				<p:outputLabel for="articlePrice" value="Price"/>
+				<p:inputText id="articlePrice" value="#{articleBean.articlePrice}" required="true" requiredMessage="Enter Price (CZK)"/>
+				
+				
+		
+				
+			</p:panelGrid>
+			
+			<br/><br/>
+			<p:commandButton id="saveBtn" value="Save" icon="ui-icon-save" action="#{articleBean.save}" update=":form:message, :form:newArticlePanel"/>
+			<p:commandButton id="cancelBtn" value="Cancel" action="index"/>		 		
+		 	
+		 	
+		 	
+		 	<!--  update=":shoppingCartForm:msg, :shoppingCartForm:shoppingCart, :searchForm:cartPanel, :shoppingCartForm:totalPrice"/> -->
+			 
+	    </p:panel> 
+			 
+		</h:form>
+		<br/>	
+		<br/>	
+		
+</ui:define>
+</ui:composition>	
+</h:body>
+</html>

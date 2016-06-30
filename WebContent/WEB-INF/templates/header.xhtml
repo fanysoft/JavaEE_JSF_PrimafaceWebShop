@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</h:head>
+
+<h:body>
+<ui:composition>
+
+	<div class="header">
+	
+		<h:form id="searchForm">
+		<p:growl id="message"/>
+	
+			<p:panel id="searchPanel" style="position: absolute; left: 64%; top: 10px; width: 285px; ">
+				<p:outputLabel for="event2" value="Search Article &nbsp;&nbsp;"/>
+			 	 
+        			<p:autoComplete 
+        				id="event2" 
+        				value="#{articleBean.selectedArticleString}" 
+        				completeMethod="#{articleBean.completeText}" >
+            			<p:ajax event="itemSelect" listener="#{articleBean.onItemSelect}" update=":searchForm:message"/>
+        			</p:autoComplete>
+			
+			</p:panel>
+			
+			
+			<p:panel id="cartPanel" style="position: absolute; left: 64%; top: 75px; width: 285px; text-align:center">
+				<p:graphicImage name="cart.jpg"/><br/>
+				<h:outputText value="Shoping Cart : #{shoppingCartBean.shoppingCart.size()} items &nbsp;&nbsp;"/><br/>
+				<h:outputText value="Total price #{shoppingCartBean.getTotalPrice()} CZK"/><br/>
+				<p:commandButton rendered="#{shoppingCartBean.shoppingCart.size()>0}" action="#{shoppingCartBean.showShoppingCart()}" ajax="false" value="To cart"/>
+				
+			</p:panel>
+			
+	
+		</h:form>
+			
+	</div><!-- .header-->
+		
+</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Homepage</title>
+</h:head>
+
+<h:body>
+<ui:composition template="/WEB-INF/templates/master.xhtml">
+
+<ui:define name="content">
+
+	<br/>
+	<h3>List Articles</h3>
+	<br/>
+	
+	<h:form id="articleList">
+	
+	<p:growl id="msg" showDetail="true" />
+	
+	<p:dataGrid var="article" value="#{articleBean.articles}" columns="3" layout="grid"  rows="20" paginator="true" id="articleGrid"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="20,40,60">
+ 
+	     	<p:panel header="#{article.articleName}" style="text-align:center">
+	     	
+	     	    <h:panelGrid columns="1" style="width:100%">
+	     	    
+	     			<p:graphicImage name="image.jpg"/>
+	     			<h:outputText value="#{article.articleDescription}"/><br/>
+	     			<h:outputText value="#{article.articlePrice}"/>
+	     			<p:commandLink id="addToCartLink" value="Buy it !" actionListener="#{shoppingCartBean.addArticle(article)}" update=":articleList:msg, :searchForm:cartPanel"/>
+	     		
+	     		</h:panelGrid>
+	     	
+	     	
+	     	</p:panel>
+	     	
+     	
+     	 </p:dataGrid>
+    
+	
+	</h:form>
+	
+	
+	<br/>
+	
+
+	 
+</ui:define>
+</ui:composition>
+</h:body>
+</html>
